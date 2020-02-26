@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.urls import path 
+from django.urls import path
 from django.shortcuts import render
 from django import forms
 from django.utils import timezone
@@ -16,7 +16,7 @@ class QuestionAdminForm(forms.ModelForm):
             'question_name': forms.Textarea(attrs={'cols': 50, 'rows': 10}),
         }
         #localized_fields = ('question_name',)
-    
+
     def clean(self):
         cleaned_data = super().clean()
         pub_date = cleaned_data.get('pub_date')
@@ -27,7 +27,7 @@ class QuestionAdminForm(forms.ModelForm):
 class ChoiceInLine(admin.TabularInline):
     model = Choice
     extra = 2
-    max_num = 4 
+    max_num = 4
 
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):
@@ -38,7 +38,7 @@ class QuestionAdmin(admin.ModelAdmin):
     inlines = [
         ChoiceInLine,
     ]
-    list_filter = ('question_id', 'lang',)
+    list_filter = ('lang',)
     def get_urls(self):
         urls = super().get_urls()
         my_urls = [
@@ -47,7 +47,7 @@ class QuestionAdmin(admin.ModelAdmin):
         return my_urls + urls
     def my_view(self, request):
         return render(request, 'admin/qb/multilingual.html', context=None)
-        
+
 class LanguageAdmin(admin.ModelAdmin):
     list_display = ('lang_name', 'lang_code')
 
