@@ -16,11 +16,21 @@ class Language(models.Model):
 
 
 class Question(models.Model):
+    class Difficulty(models.IntegerChoices):
+        VeryEasy = 1
+        Easy = 2
+        Normal = 3
+        Hard = 4
+        Challenging = 5
+
     question_id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     question_name = models.CharField(max_length=264)
     lang = models.ForeignKey(Language, on_delete=models.PROTECT)
     pub_date = models.DateTimeField("date_published")
     subject = models.ForeignKey("Subject", on_delete=models.PROTECT)
+    difficulty = models.IntegerField(
+        default=Difficulty.Normal, choices=Difficulty.choices
+    )
 
     class Meta:
         unique_together = (

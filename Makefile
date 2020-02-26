@@ -6,3 +6,6 @@ migrate:
 
 runserver:
 	python manage.py runserver
+
+format: 
+	black .
