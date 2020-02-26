@@ -9,53 +9,113 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Language',
+            name="Language",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('lang_name', models.CharField(max_length=64)),
-                ('lang_code', models.CharField(max_length=2)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("lang_name", models.CharField(max_length=64)),
+                ("lang_code", models.CharField(max_length=2)),
             ],
         ),
         migrations.CreateModel(
-            name='Standard',
+            name="Standard",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('standard', models.CharField(max_length=64)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("standard", models.CharField(max_length=64)),
             ],
         ),
         migrations.CreateModel(
-            name='Subject',
+            name="Subject",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('sub_name', models.CharField(max_length=64)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("sub_name", models.CharField(max_length=64)),
             ],
         ),
         migrations.CreateModel(
-            name='Question',
+            name="Question",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('question_id', models.UUIDField(default=uuid.uuid4, editable=False, unique=True)),
-                ('question_name', models.CharField(max_length=264)),
-                ('pub_date', models.DateTimeField(verbose_name='date_published')),
-                ('lang', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='qb.Language')),
-                ('subject', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='qb.Subject')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "question_id",
+                    models.UUIDField(default=uuid.uuid4, editable=False, unique=True),
+                ),
+                ("question_name", models.CharField(max_length=264)),
+                ("pub_date", models.DateTimeField(verbose_name="date_published")),
+                (
+                    "lang",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.PROTECT, to="qb.Language"
+                    ),
+                ),
+                (
+                    "subject",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.PROTECT, to="qb.Subject"
+                    ),
+                ),
             ],
-            options={
-                'unique_together': {('question_id', 'lang')},
-            },
+            options={"unique_together": {("question_id", "lang")},},
         ),
         migrations.CreateModel(
-            name='Choice',
+            name="Choice",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('choice_text', models.CharField(max_length=64)),
-                ('lang', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='qb.Language')),
-                ('question', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='qb.Question')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("choice_text", models.CharField(max_length=64)),
+                (
+                    "lang",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.PROTECT, to="qb.Language"
+                    ),
+                ),
+                (
+                    "question",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="qb.Question"
+                    ),
+                ),
             ],
         ),
     ]

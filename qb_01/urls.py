@@ -17,12 +17,12 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('', include('qb.urls')),
-    path('admin/', admin.site.urls),
-    path('accounts/', include('django.contrib.auth.urls'))
+    path("", include("qb.urls")),
+    path("admin/", admin.site.urls),
+    path("accounts/", include("django.contrib.auth.urls")),
 ]
 
 
-admin.site.site_header = 'Question Bank'
-admin.site.site_title = 'Question Bank'
-admin.site.index_title = 'Application Models'
+admin.site.site_header = "Question Bank"
+admin.site.site_title = "Question Bank"
+admin.site.index_title = "Application Models"
