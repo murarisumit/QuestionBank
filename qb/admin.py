@@ -35,9 +35,9 @@ class ChoiceInLine(admin.TabularInline):
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):
     form = QuestionAdminForm
-    list_display = ("question_id", "question_name", "lang", "pub_date", "difficulty")
-    list_display_links = ("question_id",)
-    list_editable = ("lang",)
+    list_display = ("question_name", "lang", "pub_date", "difficulty")
+    list_display_links = ("question_name",)
+    list_editable = ("lang", "difficulty")
     inlines = [
         ChoiceInLine,
     ]

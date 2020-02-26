@@ -23,14 +23,15 @@ class Question(models.Model):
         Hard = 4
         Challenging = 5
 
-    question_id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    question_id = models.UUIDField(default=uuid.uuid4, editable=False)
     question_name = models.CharField(max_length=264)
-    lang = models.ForeignKey(Language, on_delete=models.PROTECT)
-    pub_date = models.DateTimeField("date_published")
-    subject = models.ForeignKey("Subject", on_delete=models.PROTECT)
+    pub_date = models.DateTimeField("date_published", auto_now_add=True)
     difficulty = models.IntegerField(
         default=Difficulty.Normal, choices=Difficulty.choices
     )
+
+    lang = models.ForeignKey(Language, on_delete=models.PROTECT)
+    subject = models.ForeignKey("Subject", on_delete=models.PROTECT)
 
     class Meta:
         unique_together = (
